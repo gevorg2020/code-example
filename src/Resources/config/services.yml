@@ -1,0 +1,20 @@
+services:
+  app.service.user:
+    class: App\Service\UserService
+    arguments:
+      - '@security.helper'
+  app.service.registration:
+    class: App\Service\RegistrationService
+    arguments:
+      - '@security.user_password_encoder.generic'
+      - '@app.repository.user'
+      - '@validator'
+  app.service.file:
+    class: App\Service\FileService
+    arguments:
+      - '@slugger'
+      - '@parameter_bag'
+      - '@validator'
+      - '@training.service.exercise'
+
+  App\Service\UserService: '@app.service.user'

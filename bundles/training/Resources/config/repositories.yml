@@ -1,0 +1,24 @@
+services:
+  training.repository.training:
+    class: Fitness\Bundle\TrainingBundle\Repository\TrainingRepository
+    factory: ['@doctrine.orm.default_entity_manager', getRepository]
+    arguments:
+      - Fitness\Bundle\TrainingBundle\Entity\Training
+
+  training.repository.user_training:
+    class: Fitness\Bundle\TrainingBundle\Repository\UserTrainingRepository
+    factory: ['@doctrine.orm.default_entity_manager', getRepository]
+    arguments:
+      - Fitness\Bundle\TrainingBundle\Entity\UserTraining
+
+  training.repository.exercise_video:
+    class: Fitness\Bundle\TrainingBundle\Repository\ExerciseVideoRepository
+    factory: ['@doctrine.orm.default_entity_manager', getRepository]
+    arguments:
+      - Fitness\Bundle\TrainingBundle\Entity\ExerciseVideo
+
+  training.repository.exercise:
+    class: Fitness\Bundle\TrainingBundle\Repository\ExerciseRepository
+    factory: ['@doctrine.orm.default_entity_manager', getRepository]
+    arguments:
+      - Fitness\Bundle\TrainingBundle\Entity\Exercise

@@ -1,0 +1,47 @@
+version: '3.7'
+services:
+  db:
+    container_name: db
+    image: postgres
+    restart: always
+    ports:
+      - '5434:5432'
+    volumes:
+      - ./docker/pddata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_ROOT_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+      POSTGRES_USER: ${POSTGRES_USER}
+    networks:
+      - db
+  php:
+    container_name: php-fpm
+    build: ./docker/php-fpm
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./:/var/www/:cached
+    depends_on:
+      - db
+    networks:
+      - db
+      - php
+  nginx:
+    container_name: nginx
+    build: docker/nginx
+    ports:
+      - "81:81"
+    depends_on:
+      - php
+    networks:
+      - php
+    volumes:
+      - ./:/var/www/:cached
+      - ./docker/logs/nginx-back:/var/log/nginx:cached
+
+volumes:
+  fias_symfony_database:
+networks:
+  db:
+  php:

@@ -1,0 +1,20 @@
+services:
+  app.controller.login:
+    class: App\Controller\UserController
+    arguments:
+      - '@app.service.user'
+      - '@serializer'
+  app.controller.registration:
+    class: App\Controller\RegistrationController
+    arguments:
+      - '@app.service.registration'
+      - '@serializer'
+  app.controller.exercise:
+    class: App\Controller\ExerciseController
+    arguments:
+      - '@app.service.file'
+  app.controller.trainings:
+    class: App\Controller\TrainingController
+    arguments:
+      - '@training.service.training'
+      - '@serializer'
